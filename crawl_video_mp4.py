@@ -27,18 +27,23 @@ with open('video_url.txt', 'r') as video_url:
 
         time.sleep(3)
 
+        retries = 0
         while True:
+            retries = retries + 1
             try:
                 dl_btn = browser.find_elements_by_class_name('sf-quick-dl-btn')[0]
                 selecter = browser.find_element_by_id('captions_selector')
-                Select(selecter).select_by_index("1") # 选中第2个(索引为1)自动下载
             except Exception as e:
+                if retries >= 3:
+                    print(line)
+                    break
                 time.sleep(3)
                 continue
 
-            if not dl_btn:
+            if not dl_btn or not selecter:
                 continue
-            dl_btn.click()          # 单击下载视频
+            dl_btn.click()                         # 单击下载视频
+            Select(selecter).select_by_index("1")  # 选中第2个(索引为1)自动下载
 
-            time.sleep(300)
+            time.sleep(120)
             break
