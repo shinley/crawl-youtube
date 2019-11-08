@@ -3,6 +3,7 @@
 # 爬取视频和字幕
 
 from selenium import webdriver
+from selenium.webdriver.support.select import Select
 import time
 from lxml import etree
 
@@ -28,14 +29,16 @@ with open('video_url.txt', 'r') as video_url:
 
         while True:
             try:
-                # dl_btn = browser.find_element_by_class_name('.sf-quick-dl-btn')[0]
                 dl_btn = browser.find_elements_by_class_name('sf-quick-dl-btn')[0]
+                selecter = browser.find_element_by_id('captions_selector')
+                Select(selecter).select_by_index("1") # 选中第2个(索引为1)自动下载
             except Exception as e:
                 time.sleep(3)
                 continue
 
             if not dl_btn:
                 continue
-            dl_btn.click()
+            dl_btn.click()          # 单击下载视频
+
             time.sleep(300)
             break
