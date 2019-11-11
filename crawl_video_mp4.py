@@ -27,7 +27,12 @@ with open('video_url.txt', 'r') as video_url:
 
         url = "https://www.youtube.com" + line
         # browser.execute_script("window.open('" + url.strip() + "', '_blank');")
-        browser.get(url)
+        browser.set_page_load_timeout(20)
+        browser.set_script_timeout(20)
+        try:
+            browser.get(url)
+        except TimeoutError as e:
+            browser.refresh()
         time.sleep(3)
 
         # handles = browser.window_handles
@@ -40,6 +45,11 @@ with open('video_url.txt', 'r') as video_url:
             try:
                 ui.WebDriverWait(browser, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="savefrom__yt_btn"]/a')))
                 dl_btn = browser.find_elements_by_class_name('sf-quick-dl-btn')[0]
+                a_ele = browser.find_element_by_xpath('//*[@id="savefrom__yt_btn"]/a')
+                href = a_ele.get_attribute('href')
+                name = a_ele.get_attribute('download')
+                print(href)
+                print(name)
                 # selecter = browser.find_element_by_id('captions_selector')
                 time.sleep(5)
             except Exception as e:
