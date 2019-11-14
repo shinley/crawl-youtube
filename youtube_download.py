@@ -10,6 +10,8 @@ def my_hook(d):
 
 ydl_opts = {
     'proxy':'http://127.0.0.1:7890',
+    'subtitlesformat': 'srt',
+    'writeautomaticsub': True,
     'progress_hooks': [my_hook],
     'nocheckcertificate': True
 }
