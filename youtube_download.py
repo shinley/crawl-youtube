@@ -1,6 +1,9 @@
 from __future__ import unicode_literals
 import youtube_dl
 
+start = 3
+end = 5
+
 
 def my_hook(d):
     print(d)
@@ -8,22 +11,27 @@ def my_hook(d):
         print('Done downloading, now converting ...')
 
 
-ydl_opts = {
-    'proxy':'http://127.0.0.1:7890',
-    'subtitlesformat': 'srt',
-    'writeautomaticsub': True,
-    'progress_hooks': [my_hook],
-    'nocheckcertificate': True,
-    'outtmpl': '%(title)s%(ext)s'
-}
+with open('video_url-01.txt', 'r') as f:
+    all_list = list(f)
+    all_list.reverse()
 
-with open('video_url.txt', 'r') as video_url:
-    while True:
-        line = video_url.readline()
-        if not line:
-            break
+    while start < end:
+        if len(all_list) >= start + 1:
+            line = all_list[start]
+
+        temp_count = start + 1
+        count = '%03d' % temp_count
+        ydl_opts = {
+            'proxy': 'http://127.0.0.1:7890',
+            'subtitlesformat': 'vtt',
+            'writeautomaticsub': True,
+            'progress_hooks': [my_hook],
+            'nocheckcertificate': True,
+            'outtmpl': count + '.%(title)s.%(ext)s'
+        }
 
         url = "https://www.youtube.com" + line
-
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
+
+        start = start + 1
