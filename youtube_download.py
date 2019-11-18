@@ -13,7 +13,8 @@ ydl_opts = {
     'subtitlesformat': 'srt',
     'writeautomaticsub': True,
     'progress_hooks': [my_hook],
-    'nocheckcertificate': True
+    'nocheckcertificate': True,
+    'outtmpl': '%(title)s%(ext)s'
 }
 
 with open('video_url.txt', 'r') as video_url:
