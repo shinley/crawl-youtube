@@ -22,11 +22,12 @@ with open('video_url-01.txt', 'r') as f:
         temp_count = start + 1
         count = '%03d' % temp_count
         ydl_opts = {
+            # 'proxy': 'http://127.0.0.1:7890',
             'subtitlesformat': 'vtt',
             'writeautomaticsub': True,
             'progress_hooks': [my_hook],
             'nocheckcertificate': True,
-            'outtmpl': "./video/"+count + '.%(title)s.%(ext)s'
+            'outtmpl': "./video/" + count + '.%(title)s.%(ext)s'
         }
 
         url = "https://www.youtube.com" + line
