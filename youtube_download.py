@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 import youtube_dl
 
-start = 30
-end = 50
+start = 60
+end = 70
 
 
 def my_hook(d):
@@ -22,11 +22,12 @@ with open('video_url-01.txt', 'r') as f:
         temp_count = start + 1
         count = '%03d' % temp_count
         ydl_opts = {
-            # 'proxy': 'http://127.0.0.1:7890',
+            'proxy': 'http://127.0.0.1:7890',
             'subtitlesformat': 'vtt',
             'writeautomaticsub': True,
             'progress_hooks': [my_hook],
             'nocheckcertificate': True,
+            'format':'mp4',
             'outtmpl': "./video/" + count + '.%(title)s.%(ext)s'
         }
 
