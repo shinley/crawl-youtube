@@ -13,7 +13,8 @@ option.add_argument('--disable-dev-shm-usage')
 
 option.add_argument("--proxy-server=http://127.0.0.1:7890")
 # url = 'http://quote.eastmoney.com/concept/sz000735.html'
-url = 'https://www.youtube.com/user/theteachervanessa/videos'
+# url = 'https://www.youtube.com/user/theteachervanessa/videos'
+url = 'https://www.youtube.com/channel/UCz4tgANd4yy8Oe0iXCdSWfA/videos'
 # url = 'https://www.baidu.com'
 browser = webdriver.Chrome(chrome_options=option)
 browser.get(url)
@@ -66,12 +67,12 @@ print(content)
 html = etree.HTML(content)
 html_data = html.xpath('//*[@id="details"]//*[@id="video-title"]//text()')
 
-with open('video_name.txt', 'w') as f:
+with open('lucy_name.txt', 'w') as f:
     for data in html_data:
         f.writelines(data + "\n")
 
 url_data = html.xpath('//*[@id="details"]//*[@id="video-title"]/@href')
-with open('video_url.txt', 'w') as f:
+with open('lucy_url.txt', 'w') as f:
     for ud in url_data:
         f.writelines(ud + "\n")
 
