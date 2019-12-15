@@ -1,15 +1,18 @@
-import shutil
+import os
 
-readPath = '001.Living in the South of France.srt'
-writePath = '001.Living in the South of France.m.srt'
+files = os.listdir("./video")
 
-lines_seen = set()
-outfiile = open(writePath, 'a+', encoding='utf-8')
+for file in files:
+    if file.endswith(".srt"):
+        print(file)
 
-f = open(readPath, 'r', encoding='utf-8')
+        readPath = './video/'+file
+        writePath = './srt/'+file
 
-for line in f:
-    if line not in lines_seen:
-        outfiile.write(line)
-        if not line == '\n':
-            lines_seen.add(line)
+        with open(writePath, 'a+', encoding='utf-8') as outfiile, open(readPath, 'r', encoding='utf-8') as f:
+            lines_seen = set()
+            for line in f:
+                if line not in lines_seen:
+                    outfiile.write(line)
+                    if not line == '\n':
+                        lines_seen.add(line)
