@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 import youtube_dl
 
-start = 350
-end = 351
+start = 24
+end = 25
 
 
 def my_hook(d):
@@ -11,7 +11,7 @@ def my_hook(d):
         print('Done downloading, now converting ...')
 
 
-with open('video_url-01.txt', 'r') as f:
+with open('lucy_url.txt', 'r') as f:
     all_list = list(f)
     all_list.reverse()
 
@@ -28,7 +28,7 @@ with open('video_url-01.txt', 'r') as f:
             'progress_hooks': [my_hook],
             'nocheckcertificate': True,
             'format':'mp4',
-            'outtmpl': "./video/" + count + '.%(title)s.%(ext)s'
+            'outtmpl': "./lucy_video/" + count + '.%(title)s.%(ext)s'
         }
 
         url = "https://www.youtube.com" + line
