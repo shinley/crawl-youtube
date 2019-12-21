@@ -24,7 +24,7 @@ for file in files:
 
         cmd = cmd % (mp4_src, logo_path, srt_file, out_file)
         sys.stdout.flush()
-        ret = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
+        ret = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True)
         stdout, stderr = ret.communicate()
         print(ret.returncode)
         print(stdout)
