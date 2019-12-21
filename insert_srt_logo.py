@@ -29,8 +29,16 @@ for file in files:
         print(ret.returncode)
         print(stdout)
         print(stderr)
-        ret.stdout.close()
-        ret.stderr.close()
+        if ret.stdin:
+            ret.stdin.close()
+        if ret.stdout:
+            ret.stdout.close()
+        if ret.stderr:
+            ret.stderr.close()
+        try:
+            ret.kill()
+        except OSError:
+            pass
         # wait finished
         # ret_out = ret.stdout.read().decode('utf8')
         # print(ret_out)
